@@ -14,6 +14,7 @@ const City = () => {
     const renderer = new THREE.WebGLRenderer({ antialias: true });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xffffff);
     mountRef.current.appendChild(renderer.domElement);
 
     // Lighting
