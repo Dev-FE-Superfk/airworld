@@ -30,7 +30,7 @@ const City = () => {
       '/models/Nike_Building.glb',
       '/models/BMW_Building.glb',
       '/models/Uniqlo_Building.glb',
-      '/models/Bag_store_Building.glb',
+      '/models/Bag_Store_Building.glb',
       '/models/Bank_Building.glb',
       '/models/Clocksmith_Building.glb',
       '/models/General_Building.glb',
