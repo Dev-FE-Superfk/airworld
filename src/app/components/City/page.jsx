@@ -67,7 +67,7 @@ const City = () => {
     ];
 
     buildingFiles.forEach((file, index) => {
-        loader.load(file, (gltf) => {
+      loader.load(file, (gltf) => {
         const building = gltf.scene;
         building.traverse((node) => {
         if (node.isMesh) {
@@ -86,13 +86,13 @@ const City = () => {
 
         building.position.set(buildingPositions[index].x, buildingPositions[index].y, buildingPositions[index].z);
         scene.add(building);
-    });
+      });
     });
 
     const airbaloonFiles = [
-      '/models/Ballon_A.glb',
-      '/models/Ballon_B.glb',
-      '/models/Ballon_C.glb',
+      '/models/Ballon_A_Animate.glb',
+      '/models/Ballon_B_Animate.glb',
+      '/models/Ballon_C_Animate.glb',
     ];
 
     const airbaloonPositions = [
@@ -102,17 +102,25 @@ const City = () => {
     ];
 
     airbaloonFiles.forEach((file, index) => {
-      loader.load(file, (gltf) => {
-        const airbaloon = gltf.scene;
-        airbaloon.traverse((node) => {
-          if (node.isMesh) {
-            node.castShadow = true; // Ensure the airbaloon casts shadows
-            node.receiveShadow = true; // Ensure the airbaloon receives shadows
-          }
+        loader.load(file, (gltf) => {
+            const airbaloon = gltf.scene;
+            airbaloon.traverse((node) => {
+            if (node.isMesh) {
+                node.castShadow = true; // Ensure the airbaloon casts shadows
+                node.receiveShadow = true; // Ensure the airbaloon receives shadows
+            }
+            });
+
+            // Create a mixer for the animation
+            const mixer = new THREE.AnimationMixer(airbaloon);
+            gltf.animations.forEach((clip) => {
+            mixer.clipAction(clip).play();
+            });
+            mixers.push(mixer);
+
+            airbaloon.position.set(airbaloonPositions[index].x, airbaloonPositions[index].y, airbaloonPositions[index].z);
+            scene.add(airbaloon);
         });
-        airbaloon.position.set(airbaloonPositions[index].x, airbaloonPositions[index].y, airbaloonPositions[index].z);
-        scene.add(airbaloon);
-      });
     });
 
     // Add road
@@ -182,12 +190,12 @@ const City = () => {
     const curve = new THREE.CatmullRomCurve3(waypoints, false, 'catmullrom', 0.5);
 
     let currentT = 0; // Parameter for interpolation along the curve
-    const duration = 10000; // Duration for the entire loop in milliseconds (adjusted to slow down)
+    const duration = 15000; // Duration for the entire loop in milliseconds (adjusted to slow down)
     const speed = 1 / (duration / 16); // Speed of movement, adjust as needed
 
     // Clock for animation
     const clock = new THREE.Clock();
-    
+
     // Animation Loop
     const animate = () => {
       requestAnimationFrame(animate);
