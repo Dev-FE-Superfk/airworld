@@ -1,8 +1,8 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Logo } from '../../../../public';
-import City from '../City/page'; // Pastikan komponen City diimpor dengan benar
+import { Logo } from '@/../public';
+import City from '@/components/City/page'; // Pastikan komponen City diimpor dengan benar
 import './video.scss';
 
 const InteractiveVideo = () => {

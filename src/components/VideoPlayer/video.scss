@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    //background: url('../../../../public/images/background_blur.png') no-repeat center / cover;
+    //background: url('../../../public/images/background_blur.png') no-repeat center / cover;
     z-index: 100;
     text-align: center;
     display: flex;
@@ -51,13 +51,13 @@ video{
     position: fixed;
     top: 0;
     left: 0;
-    //background: url('../../../../public/images/background_intro_2.png') no-repeat center / cover;
+    //background: url('../../../public/images/background_intro_2.png') no-repeat center / cover;
     z-index: 100;
 }
 .letsgo_btn{
     width: 200px;
     height: 80px;
-    background: url('../../../../public/images/letsgo_btn.png') no-repeat center / contain;
+    background: url('../../../public/images/letsgo_btn.png') no-repeat center / contain;
     text-indent: -9999px;
     position: absolute;
     top: 30%;

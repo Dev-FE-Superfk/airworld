@@ -1,4 +1,4 @@
-import './styles/stylesheet.css';
+import '@/styles/stylesheet.css';
 import "./globals.css";
 
 

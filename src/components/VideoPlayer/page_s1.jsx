@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import City from "../City/page";
-import { Logo } from '../../../../public';
+import { Logo } from '../../../public';
 import './video.scss';
 
 const VideoPlayer = () => {

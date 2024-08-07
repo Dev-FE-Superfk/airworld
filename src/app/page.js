@@ -1,5 +1,5 @@
 // import City from "./components/City/page";
-import VideoPlayer from "./components/VideoPlayer/page";
+import VideoPlayer from "@/components/VideoPlayer/page";
 
 export default function Home() {
   return (
