@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Advent Pro';
+    src: url('/fonts/AdventPro-Bold.woff2') format('woff2'),
+        url('/fonts/AdventPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Advent Pro';
+    src: url('/fonts/AdventPro-Medium.woff2') format('woff2'),
+        url('/fonts/AdventPro-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Advent Pro';
+    src: url('/fonts/AdventPro-SemiBold.woff2') format('woff2'),
+        url('/fonts/AdventPro-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Advent Pro';
+    src: url('/fonts/AdventPro-Regular.woff2') format('woff2'),
+        url('/fonts/AdventPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

@@ -1,11 +1,14 @@
 'use client'
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import Popup from '../Popup/page'; 
+import './city.scss';
 
 const City = () => {
   const mountRef = useRef(null);
+  const [selectedBuilding, setSelectedBuilding] = useState(null);
 
   useEffect(() => {
     // Setup Scene, Camera, Renderer
@@ -42,57 +45,58 @@ const City = () => {
     // Load GLTF Models
     const loader = new GLTFLoader();
     const buildingFiles = [
-      '/models/Sirine_Building_w_animation.glb',
-      '/models/Nike_Building.glb',
-      '/models/BMW_Building.glb',
-      '/models/Uniqlo_Building.glb',
-      '/models/Bag_Store_Building.glb',
-      '/models/Bank_Building.glb',
-      '/models/Clocksmith_Building.glb',
-      '/models/General_Building.glb',
-      '/models/Tape_Building.glb',
-    ];
-
-    // Add Buildings with Different Textures and Positions
-    const buildingPositions = [
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-    ];
-
-    buildingFiles.forEach((file, index) => {
-      loader.load(file, (gltf) => {
-        const building = gltf.scene;
-        building.traverse((node) => {
-        if (node.isMesh) {
-            node.castShadow = true; // Ensure the building casts shadows
-            node.receiveShadow = true; // Ensure the building receives shadows
-        }
+        { file: '/models/Sirine_Building_w_animation.glb', name: 'Sirine Building' },
+        { file: '/models/Nike_Building.glb', name: 'Nike Building' },
+        { file: '/models/BMW_Building.glb', name: 'BMW Building' },
+        { file: '/models/Uniqlo_Building.glb', name: 'Uniqlo Building' },
+        { file: '/models/Bag_Store_Building.glb', name: 'Bag Store Building' },
+        { file: '/models/Bank_Building.glb', name: 'Bank Building' },
+        { file: '/models/Clocksmith_Building.glb', name: 'Clocksmith Building' },
+        { file: '/models/General_Building.glb', name: 'General Building' },
+        { file: '/models/Tape_Building.glb', name: 'Tape Building' },
+      ];
+  
+      // Add Buildings with Different Textures and Positions
+      const buildingPositions = [
+        { x: 0, y: 0, z: 0 },
+        { x: 0, y: 0, z: 0 },
+        { x: 0, y: 0, z: 0 },
+        { x: 0, y: 0, z: 0 },
+        { x: 0, y: 0, z: 0 },
+        { x: 0, y: 0, z: 0 },
+        { x: 0, y: 0, z: 0 },
+        { x: 0, y: 0, z: 0 },
+        { x: 0, y: 0, z: 0 },
+      ];
+  
+      buildingFiles.forEach((buildingData, index) => {
+        loader.load(buildingData.file, (gltf) => {
+          const building = gltf.scene;
+          building.traverse((node) => {
+            if (node.isMesh) {
+              node.castShadow = true;
+              node.receiveShadow = true;
+            }
+          });
+    
+          if (buildingData.file === '/models/Sirine_Building_w_animation.glb') {
+            const mixer = new THREE.AnimationMixer(building);
+            gltf.animations.forEach((clip) => {
+              mixer.clipAction(clip).play();
+            });
+            mixers.push(mixer);
+          }
+    
+          building.position.set(buildingPositions[index].x, buildingPositions[index].y, buildingPositions[index].z);
+          building.userData = { name: buildingData.name };
+          scene.add(building);
         });
-
-        if (file === '/models/Sirine_Building_w_animation.glb') {
-        const mixer = new THREE.AnimationMixer(building);
-        gltf.animations.forEach((clip) => {
-            mixer.clipAction(clip).play();
-        });
-        mixers.push(mixer);
-        }
-
-        building.position.set(buildingPositions[index].x, buildingPositions[index].y, buildingPositions[index].z);
-        scene.add(building);
       });
-    });
 
     const airbaloonFiles = [
-      '/models/Ballon_A.glb',
-      '/models/Ballon_B.glb',
-      '/models/Ballon_C.glb',
+      '/models/Ballon_A_Animate.glb',
+      '/models/Ballon_B_Animate.glb',
+      '/models/Ballon_C_Animate.glb',
     ];
 
     const airbaloonPositions = [
@@ -176,6 +180,29 @@ const City = () => {
 
     window.addEventListener('resize', handleResize);
 
+    // Initialize raycaster and mouse
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector3();
+
+    // Add event listener for click
+    const handleClick = (event) => {
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+        raycaster.ray.origin.setFromMatrixPosition(camera.matrixWorld);
+        raycaster.ray.direction.set(mouse.x, mouse.y, 0.5).unproject(camera).sub(raycaster.ray.origin).normalize();
+
+        const intersects = raycaster.intersectObjects(scene.children, true);
+        if (intersects.length > 0) {
+            const intersectedObject = intersects[0].object;
+            if (intersectedObject.parent && intersectedObject.parent.userData) {
+                setSelectedBuilding(intersectedObject.parent.userData.name);
+            }
+        }
+    };
+
+        window.addEventListener('click', handleClick);
+
     // Define waypoints
     const waypoints = [
       new THREE.Vector3(0, 3.5, 0),
@@ -190,7 +217,7 @@ const City = () => {
     const curve = new THREE.CatmullRomCurve3(waypoints, false, 'catmullrom', 0.5);
 
     let currentT = 0; // Parameter for interpolation along the curve
-    const duration = 10000; // Duration for the entire loop in milliseconds (adjusted to slow down)
+    const duration = 15000; // Duration for the entire loop in milliseconds (adjusted to slow down)
     const speed = 1 / (duration / 16); // Speed of movement, adjust as needed
 
     // Clock for animation
@@ -236,13 +263,21 @@ const City = () => {
         mountRef.current.removeChild(renderer.domElement);
       }
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('click', handleClick);
       // Clean up resources
       scene.clear();
       renderer.dispose();
     };
   }, []);
 
-  return <div ref={mountRef}></div>;
+    return (
+        <>
+            <div ref={mountRef}></div>
+            {selectedBuilding && (
+            <Popup buildingName={selectedBuilding} onClose={() => setSelectedBuilding(null)}/>
+            )}
+        </>
+    );
 };
 
 export default City;

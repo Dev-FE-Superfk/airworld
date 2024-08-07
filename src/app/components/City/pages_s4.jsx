@@ -15,7 +15,7 @@ const City = () => {
     
     // Focal Length to Field of View
     const focalLength = 50; // in mm
-    const sensorHeight = 36; // Full-frame sensor height in mm
+    const sensorHeight = 50; // Full-frame sensor height in mm
     const fov = 2 * Math.atan((sensorHeight / 2) / focalLength) * (180 / Math.PI);
 
     const camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -50,7 +50,7 @@ const City = () => {
     // Load GLTF Models
     const loader = new GLTFLoader();
     const buildingFiles = [
-      { file: '/models/Sirine_Building.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },
+      { file: '/models/Sirine_Building_w_animation.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },
       { file: '/models/Apple_Building.glb', category: 'building', name: 'Apple', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_apple.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
       { file: '/models/BMW_Building.glb', category: 'building', name: 'BMW', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_bmw.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
       { file: '/models/Nike_Building.glb', category: 'building', name: 'Nike', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_nike.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
@@ -110,7 +110,7 @@ const City = () => {
             }
           });
     
-          if (buildingData.file === '/models/Sirine_Building.glb') {
+          if (buildingData.file === '/models/Sirine_Building_w_animation.glb') {
             const mixer = new THREE.AnimationMixer(building);
             gltf.animations.forEach((clip) => {
               mixer.clipAction(clip).play();
@@ -204,17 +204,15 @@ const City = () => {
     ]);
     scene.background = textureCube;
 
-    camera.position.set(0, 10, 20); // Initial camera position
+    camera.position.set(0, 5, 10); // Initial camera position
 
     // OrbitControls
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.25;
-    controls.enableZoom = true;
-    controls.minDistance = 10; // Jarak minimum zoom
-    controls.maxDistance = 50; // Jarak maksimum zoom
+    controls.enableDamping = true; // Optional: Adds a slight delay to the controls
+    controls.dampingFactor = 0.25; // Optional: Sets the damping factor
+    controls.enableZoom = true; // Optional: Enables zooming
     controls.minPolarAngle = Math.PI / 4; // Minimum angle to look down
-    controls.maxPolarAngle = Math.PI / 2; // Maximum angle to look up
+    controls.maxPolarAngle = Math.PI / 2; // Maximum angle to look up (down to the horizon)
 
     // Handle window resize
     const handleResize = () => {
