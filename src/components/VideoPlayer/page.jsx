@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { Logo } from '@/../public';
 import City from '@/components/City/page'; // Pastikan komponen City diimpor dengan benar
@@ -10,24 +10,8 @@ const InteractiveVideo = () => {
   const [showButton, setShowButton] = useState(false);
   const [introBoxVisible, setIntroBoxVisible] = useState(true); // Kontrol visibilitas intro_box
   const [showCity, setShowCity] = useState(false); // Kontrol visibilitas komponen City
-  const [cityLoaded, setCityLoaded] = useState(false); // Kontrol jika City sudah dirender
+  const [showVideo, setShowVideo] = useState(true); // Kontrol visibilitas video
   const videoRef = useRef(null);
-  const cityRef = useRef(null);
-
-  useEffect(() => {
-    if (showCity) {
-      const checkRenderComplete = () => {
-        if (cityRef.current) {
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              setCityLoaded(true);
-            });
-          });
-        }
-      };
-      setTimeout(checkRenderComplete, 500); // Adjust timeout if necessary
-    }
-  }, [showCity]);
 
   const handleWhiteButtonClick = () => {
     setIntroBoxVisible(false); // Sembunyikan intro_box
@@ -41,7 +25,7 @@ const InteractiveVideo = () => {
           videoRef.current.pause();
           setIsPaused(true);
         }
-      }, 4000); // Ganti 5000 dengan waktu yang diinginkan dalam milidetik
+      }, 4000); // Ganti 4000 dengan waktu yang diinginkan dalam milidetik
 
       return () => clearTimeout(timer);
     }
@@ -56,15 +40,18 @@ const InteractiveVideo = () => {
   };
 
   const handleVideoEnded = () => {
+    setShowVideo(false); // Sembunyikan video setelah selesai
     setShowCity(true); // Tampilkan komponen City setelah video selesai
   };
 
   return (
     <div>
-      <video ref={videoRef} width="600" onEnded={handleVideoEnded}>
-        <source src="/videos/Video_Intro_Airworld.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      {showVideo && (
+        <video ref={videoRef} width="600" onEnded={handleVideoEnded}>
+          <source src="/videos/Video_Intro_Airworld.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
       {introBoxVisible && (
         <div className="intro_box">
           <div className="intro_flex">
@@ -81,15 +68,11 @@ const InteractiveVideo = () => {
           <button className='letsgo_btn' onClick={handlePlayClick}>Let's Go</button>
         </div>
       )}
-      {showCity && (
-        <div
-          style={{ position: 'relative', zIndex: 100 }}
-          className={`city ${cityLoaded ? 'fade-in' : ''}`}
-          ref={cityRef}
-        >
-          <City />
-        </div>
-      )}
+      <div
+        className={`city ${showCity ? 'fade-in' : 'hidden'}`}
+      >
+        <City />
+      </div>
     </div>
   );
 };

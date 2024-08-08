@@ -1,0 +1,12 @@
+.city {
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
+  }
+  
+  .city.fade-in {
+    opacity: 1;
+  }
+  
+  .city.hidden {
+    visibility: hidden;
+  }
