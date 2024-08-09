@@ -51,54 +51,17 @@ const City = () => {
     // Load GLTF Models
     const loader = new GLTFLoader();
     const buildingFiles = [
-      { file: '/models/Sirine_Building.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },
-      { file: '/models/Apple_Building.glb', category: 'building', name: 'Apple', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_apple.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
-      { file: '/models/BMW_Building.glb', category: 'building', name: 'BMW', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_bmw.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
-      { file: '/models/Nike_Building.glb', category: 'building', name: 'Nike', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_nike.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
-      { file: '/models/Uniqlo_Building.glb', category: 'building', name: 'Uniqlo', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_uniqlo.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
-      { file: '/models/Cocacola_Building.glb', category: 'building', name: 'Coca Cola', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_cocacola.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
-      { file: '/models/Nintendo_Building.glb', category: 'building', name: 'Nintendo', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_nintendo.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
-      { file: '/models/Swatch_Building.glb', category: 'building', name: 'Swatch', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_swatch.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
-      { file: '/models/B1.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B2.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B3.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B4.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B5.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B6.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B7.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B8.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B9.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B10.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B11.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B12.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B13.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B14.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },    { file: '/models/B31.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B15.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B16.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B17.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B18.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B19.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B20.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B21.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B22.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B23.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B24.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B25.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B26.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B27.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B28.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B29.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B30.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B31.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B32.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B33.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B34.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B35.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B36.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B37.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B38.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B39.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B40.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },    
+      { file: '/models/Sirine_Building_emmision.glb', category: 'sirine', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },
+      { file: '/models/Apple_Building.glb', category: 'brands', name: 'Apple', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_apple.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
+      { file: '/models/BMW_Building.glb', category: 'brands', name: 'BMW', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_bmw.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
+      { file: '/models/Nike_Building.glb', category: 'brands', name: 'Nike', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_nike.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
+      { file: '/models/Uniqlo_Building.glb', category: 'brands', name: 'Uniqlo', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_uniqlo.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
+      { file: '/models/Cocacola_Building.glb', category: 'brands', name: 'Coca Cola', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_cocacola.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
+      { file: '/models/Nintendo_Building.glb', category: 'brands', name: 'Nintendo', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_nintendo.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
+      { file: '/models/Swatch_Building.glb', category: 'brands', name: 'Swatch', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_swatch.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
+      { file: '/models/Ballon_A_Animate.glb', category: 'balloon', position: { x: 0, y: 0, z: 0 }, image: '/images/mc_gamer.png', subclass: 'airworld', title: '<h3>Air World<span>TM</span></h3>', description: '<p>is a proprietary O2O social gaming network build upon the infrastructure of WEB2.0 / 3.0 Metaverse that allows users to play, learn, earn, entertain and socialize with strangers within the global community and people they know IRL.</p>' },  
+      { file: '/models/Ballon_C_Animate.glb', category: 'balloon', position: { x: 0, y: 0, z: 0 }, image: '/images/mc_deer.png', subclass: 'airverse', title: '<h3>Air Verse<span>TM</span></h3>', description: '<p>[ Metaverse-as-a-Service ]  is an immersive infrastructure that enable a wide range of industries - from retail, F&B and real estate to education and entertainment - to harness the potential of interactive virtual experiences and actionable insights  to grow their revenue without the heavy investment in infrastructure and development expertise typically required.</p>' },  
+      { file: '/models/Ballon_B_Animate.glb', category: 'balloon', position: { x: 0, y: 0, z: 0 }, image: '/images/mc_rabbit.png', subclass: 'anywhere', title: '<h3>Anywhere<span>TM</span></h3>', description: '<p>is the First Decentralized Location Based Social-Fi + DEPIN Data Network.</p><p>Our ANIWHERETM Social Platform provides users with the chance to connect with friends based on their physical locations. Users can adopt purely virtual identities and role-play as different characters through customizable avatars.</p><p>Our community can also engage in interactive quests created by other users and business partners such as retailers, shopping malls, hotels, and restaurants. These quests can be<ul><li>Simply as check-In</li><li>Funny gameplays</li><li>Make a purchase in a shop</li></ul></p>' },  
     ];
   
       buildingFiles.forEach((buildingData, index) => {
@@ -111,53 +74,17 @@ const City = () => {
             }
           });
     
-          if (buildingData.file === '/models/Sirine_Building.glb') {
-            const mixer = new THREE.AnimationMixer(building);
-            gltf.animations.forEach((clip) => {
-              mixer.clipAction(clip).play();
-            });
-            mixers.push(mixer);
-          }
+          const mixer = new THREE.AnimationMixer(building);
+          gltf.animations.forEach((clip) => {
+            mixer.clipAction(clip).play();
+          });
+          mixers.push(mixer);
 
           building.position.set(buildingData.position.x, buildingData.position.y, buildingData.position.z);
-          building.userData = { name: buildingData.name, masthead: buildingData.masthead, description: buildingData.description, thumbnails: buildingData.thumbnails, tags: buildingData.tags };
+          building.userData = { category: buildingData.category, subclass: buildingData.subclass, name: buildingData.name, masthead: buildingData.masthead, description: buildingData.description, thumbnails: buildingData.thumbnails, tags: buildingData.tags, image: buildingData.image, title: buildingData.title };
           scene.add(building);
         });
       });
-
-    const airbaloonFiles = [
-      '/models/Ballon_A_Animate.glb',
-      '/models/Ballon_B_Animate.glb',
-      '/models/Ballon_C_Animate.glb',
-    ];
-
-    const airbaloonPositions = [
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-    ];
-
-    airbaloonFiles.forEach((file, index) => {
-        loader.load(file, (gltf) => {
-            const airbaloon = gltf.scene;
-            airbaloon.traverse((node) => {
-            if (node.isMesh) {
-                node.castShadow = true; // Ensure the airbaloon casts shadows
-                node.receiveShadow = true; // Ensure the airbaloon receives shadows
-            }
-            });
-
-            // Create a mixer for the animation
-            const mixer = new THREE.AnimationMixer(airbaloon);
-            gltf.animations.forEach((clip) => {
-            mixer.clipAction(clip).play();
-            });
-            mixers.push(mixer);
-
-            airbaloon.position.set(airbaloonPositions[index].x, airbaloonPositions[index].y, airbaloonPositions[index].z);
-            scene.add(airbaloon);
-        });
-    });
 
     // Add road
     loader.load('/models/Jalan.glb', (gltf) => {
@@ -213,9 +140,9 @@ const City = () => {
     controls.dampingFactor = 0.25;
     controls.enableZoom = true;
     controls.minDistance = 10; // Jarak minimum zoom
-    controls.maxDistance = 50; // Jarak maksimum zoom
+    controls.maxDistance = 35; // Jarak maksimum zoom
     controls.minPolarAngle = Math.PI / 4; // Minimum angle to look down
-    controls.maxPolarAngle = Math.PI / 2; // Maximum angle to look up
+    controls.maxPolarAngle = Math.PI / 2.25; // Maximum angle to look up
 
     // Handle window resize
     const handleResize = () => {
@@ -243,7 +170,31 @@ const City = () => {
           const intersectedObject = intersects[0].object;
           if (intersectedObject.parent && intersectedObject.parent.userData) {
             const userData = intersectedObject.parent.userData;
-            if (userData.name) {
+            if (userData.category === 'balloon') {
+              if (userData.subclass === 'airworld') {
+                // Handle airworld balloon click
+                setSelectedBuilding({
+                  ...userData,
+                  subclass: 'airworld'
+                });
+              } else if (userData.subclass === 'airverse') {
+                // Handle airverse balloon click
+                setSelectedBuilding({
+                  ...userData,
+                  subclass: 'airverse'
+                });
+              } else if (userData.subclass === 'anywhere') {
+                // Handle anywhere balloon click
+                setSelectedBuilding({
+                  ...userData,
+                  subclass: 'anywhere'
+                });
+              } else {
+                // Handle other balloon subclasses if needed
+                setSelectedBuilding(null);
+              }
+            } else if (userData.category === 'brands' || userData.category === 'sirine') {
+              // Handle brands or sirine click
               setSelectedBuilding(userData);
             } else {
               setSelectedBuilding(null);
@@ -326,11 +277,15 @@ const City = () => {
             <div ref={mountRef}></div>
             {selectedBuilding && (
             <Popup 
-              buildingName={selectedBuilding.name} 
-              buildingMasthead={selectedBuilding.masthead} 
-              buildingDescription={selectedBuilding.description} 
-              buildingThumbnail={selectedBuilding.thumbnails} 
-              buildingTags={selectedBuilding.tags} 
+              brandsName={selectedBuilding.name} 
+              brandsMasthead={selectedBuilding.masthead} 
+              brandsDescription={selectedBuilding.description} 
+              brandsThumbnail={selectedBuilding.thumbnails} 
+              brandsTags={selectedBuilding.tags}
+              category={selectedBuilding.category}
+              image={selectedBuilding.image}
+              title={selectedBuilding.title}
+              subclass={selectedBuilding.subclass}
               onClose={() => setSelectedBuilding(null)}
             />
           )}

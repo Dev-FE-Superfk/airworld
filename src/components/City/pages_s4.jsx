@@ -3,7 +3,11 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import Popup from '../Popup/page'; 
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+import Popup from '@/components/Popup/page';
+import './city.scss';
 
 const City = () => {
   const mountRef = useRef(null);
@@ -15,7 +19,7 @@ const City = () => {
     
     // Focal Length to Field of View
     const focalLength = 50; // in mm
-    const sensorHeight = 50; // Full-frame sensor height in mm
+    const sensorHeight = 36; // Full-frame sensor height in mm
     const fov = 2 * Math.atan((sensorHeight / 2) / focalLength) * (180 / Math.PI);
 
     const camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -46,11 +50,13 @@ const City = () => {
     scene.add(directionalLight);
 
     const mixers = []; // Array to store animation mixers
+    const bloomLayer = new THREE.Layers();
+    bloomLayer.set(1); // Set layer 1 for bloom
 
     // Load GLTF Models
     const loader = new GLTFLoader();
     const buildingFiles = [
-      { file: '/models/Sirine_Building_w_animation.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },
+      { file: '/models/Sirine_Building_emmision.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },
       { file: '/models/Apple_Building.glb', category: 'building', name: 'Apple', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_apple.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
       { file: '/models/BMW_Building.glb', category: 'building', name: 'BMW', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_bmw.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
       { file: '/models/Nike_Building.glb', category: 'building', name: 'Nike', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_nike.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
@@ -71,7 +77,7 @@ const City = () => {
       { file: '/models/B11.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
       { file: '/models/B12.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
       { file: '/models/B13.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
-      { file: '/models/B14.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },    { file: '/models/B31.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B14.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },
       { file: '/models/B15.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
       { file: '/models/B16.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
       { file: '/models/B17.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
@@ -100,62 +106,65 @@ const City = () => {
       { file: '/models/B40.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },    
     ];
   
-      buildingFiles.forEach((buildingData, index) => {
-        loader.load(buildingData.file, (gltf) => {
-          const building = gltf.scene;
-          building.traverse((node) => {
-            if (node.isMesh) {
-              node.castShadow = true;
-              node.receiveShadow = true;
-            }
-          });
-    
-          if (buildingData.file === '/models/Sirine_Building_w_animation.glb') {
-            const mixer = new THREE.AnimationMixer(building);
-            gltf.animations.forEach((clip) => {
-              mixer.clipAction(clip).play();
-            });
-            mixers.push(mixer);
-          }
+    buildingFiles.forEach((buildingData) => {
+      loader.load(buildingData.file, (gltf) => {
+        const building = gltf.scene;
+        building.traverse((node) => {
+          if (node.isMesh) {
+            node.castShadow = true;
+            node.receiveShadow = true;
 
-          building.position.set(buildingData.position.x, buildingData.position.y, buildingData.position.z);
-          building.userData = { name: buildingData.name, masthead: buildingData.masthead, description: buildingData.description, thumbnails: buildingData.thumbnails, tags: buildingData.tags };
-          scene.add(building);
+            // // Apply emissive material and set layer for bloom
+            // if (buildingData.file === '/models/Sirine_Building_emmision.glb') {
+            //   if (node.material instanceof THREE.MeshStandardMaterial) {
+            //     node.material.emissive = new THREE.Color(0xff0000); // Red emissive color
+            //     node.material.emissiveIntensity = 1;
+            //     node.layers.set(bloomLayer); // Set layer for bloom
+            //   }
+            // }
+          }
         });
+
+        if (buildingData.file === '/models/Sirine_Building_emmision.glb') {
+          const mixer = new THREE.AnimationMixer(building);
+          gltf.animations.forEach((clip) => {
+            mixer.clipAction(clip).play();
+          });
+          mixers.push(mixer);
+        }
+
+        building.position.set(buildingData.position.x, buildingData.position.y, buildingData.position.z);
+        building.userData = { name: buildingData.name, masthead: buildingData.masthead, description: buildingData.description, thumbnails: buildingData.thumbnails, tags: buildingData.tags };
+        scene.add(building);
       });
+    });
 
     const airbaloonFiles = [
-      '/models/Ballon_A_Animate.glb',
-      '/models/Ballon_B_Animate.glb',
-      '/models/Ballon_C_Animate.glb',
+      { file: '/models/Ballon_A_Animate.glb', category: 'balloon', position: { x: 0, y: 0, z: 0 }, image: '/images/mc_gamer.png', class: 'airworld', title: '<h2>Air World<span>TM</span></h2>', description: '<p>is a proprietary O2O social gaming network build upon the infrastructure of WEB2.0 / 3.0 Metaverse that allows users to play, learn, earn, entertain and socialize with strangers within the global community and people they know IRL.</p>' },  
+      { file: '/models/Ballon_B_Animate.glb', category: 'balloon', position: { x: 0, y: 0, z: 0 }, image: '/images/mc_deer.png', class: 'airverse', title: '<h2>Air Verse<span>TM</span></h2>', description: '<p>[ Metaverse-as-a-Service ]  is an immersive infrastructure that enable a wide range of industries - from retail, F&B and real estate to education and entertainment - to harness the potential of interactive virtual experiences and actionable insights  to grow their revenue without the heavy investment in infrastructure and development expertise typically required.</p>' },  
+      { file: '/models/Ballon_C_Animate.glb', category: 'balloon', position: { x: 0, y: 0, z: 0 }, image: '/images/mc_rabbit.png', class: 'anywhere', title: '<h2>Anywhere<span>TM</span></h2>', description: '<p>is the First Decentralized Location Based Social-Fi + DEPIN Data Network.</p><p>Our ANIWHERETM Social Platform provides users with the chance to connect with friends based on their physical locations. Users can adopt purely virtual identities and role-play as different characters through customizable avatars.</p><p>Our community can also engage in interactive quests created by other users and business partners such as retailers, shopping malls, hotels, and restaurants. These quests can be<ul><li>Simply as check-In</li><li>Funny gameplays</li><li>Make a purchase in a shop</li></ul></p>' },  
     ];
 
-    const airbaloonPositions = [
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-      { x: 0, y: 0, z: 0 },
-    ];
-
-    airbaloonFiles.forEach((file, index) => {
-        loader.load(file, (gltf) => {
-            const airbaloon = gltf.scene;
-            airbaloon.traverse((node) => {
-            if (node.isMesh) {
-                node.castShadow = true; // Ensure the airbaloon casts shadows
-                node.receiveShadow = true; // Ensure the airbaloon receives shadows
-            }
-            });
-
-            // Create a mixer for the animation
-            const mixer = new THREE.AnimationMixer(airbaloon);
-            gltf.animations.forEach((clip) => {
-            mixer.clipAction(clip).play();
-            });
-            mixers.push(mixer);
-
-            airbaloon.position.set(airbaloonPositions[index].x, airbaloonPositions[index].y, airbaloonPositions[index].z);
-            scene.add(airbaloon);
+    airbaloonFiles.forEach((airbaloonData) => {
+      loader.load(airbaloonData.file, (gltf) => {
+        const airbaloon = gltf.scene;
+        airbaloon.traverse((node) => {
+          if (node.isMesh) {
+            node.castShadow = true;
+            node.receiveShadow = true;
+          }
         });
+
+        const mixer = new THREE.AnimationMixer(airbaloon);
+        gltf.animations.forEach((clip) => {
+          mixer.clipAction(clip).play();
+        });
+        mixers.push(mixer);
+
+        airbaloon.position.set(airbaloonData.position.x, airbaloonData.position.y, airbaloonData.position.z);
+        airbaloon.userData = { image: airbaloonData.image, class: airbaloonData.class, description: airbaloonData.description, title: airbaloonData.title };
+        scene.add(airbaloon);
+      });
     });
 
     // Add road
@@ -204,15 +213,17 @@ const City = () => {
     ]);
     scene.background = textureCube;
 
-    camera.position.set(0, 5, 10); // Initial camera position
+    camera.position.set(0, 10, 20); // Initial camera position
 
     // OrbitControls
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true; // Optional: Adds a slight delay to the controls
-    controls.dampingFactor = 0.25; // Optional: Sets the damping factor
-    controls.enableZoom = true; // Optional: Enables zooming
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.25;
+    controls.enableZoom = true;
+    controls.minDistance = 10; // Jarak minimum zoom
+    controls.maxDistance = 35; // Jarak maksimum zoom
     controls.minPolarAngle = Math.PI / 4; // Minimum angle to look down
-    controls.maxPolarAngle = Math.PI / 2; // Maximum angle to look up (down to the horizon)
+    controls.maxPolarAngle = Math.PI / 2.25; // Maximum angle to look up
 
     // Handle window resize
     const handleResize = () => {
@@ -268,6 +279,14 @@ const City = () => {
     const duration = 15000; // Duration for the entire loop in milliseconds (adjusted to slow down)
     const speed = 1 / (duration / 16); // Speed of movement, adjust as needed
 
+    const composer = new EffectComposer(renderer);
+    const renderPass = new RenderPass(scene, camera);
+    composer.addPass(renderPass);
+
+    // Add UnrealBloomPass
+    const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+    composer.addPass(bloomPass);
+
     // Clock for animation
     const clock = new THREE.Clock();
 
@@ -301,6 +320,7 @@ const City = () => {
       mixers.forEach((mixer) => mixer.update(delta));
 
       controls.update();
+      composer.render(); // Use composer for rendering
       renderer.render(scene, camera);
     };
 
@@ -315,6 +335,7 @@ const City = () => {
       // Clean up resources
       scene.clear();
       renderer.dispose();
+      composer.render(); // Use composer for rendering
     };
   }, []);
 
