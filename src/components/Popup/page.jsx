@@ -32,13 +32,22 @@ export default function Popup({ category, subclass, image, title, brandsName, br
             <div dangerouslySetInnerHTML={{ __html: title }} ></div>
             <div dangerouslySetInnerHTML={{ __html: brandsDescription }} ></div>
           </div>
-          <Image src={image} alt={title} width={960} height={960} quality={100}/>
+          <div className="mc_box">
+            <Image src={image} alt={title} width={960} height={960} quality={100} />
+          </div>
           <button onClick={handleClose} className="close-btn">Close</button>
         </div>
       )}
       {category === 'sirine' && (
-        <div className="popup_box">
-          <p>Information specific to sirine category.</p>
+        <div className="popup_sirine_box">
+          <div className="mc_box">
+              <Image src={image} alt="" width={960} height={960} quality={100} />
+          </div>
+          <div className="ps_info">
+            <div dangerouslySetInnerHTML={{ __html: brandsDescription }} ></div>
+            <button className="blue_btn">Connect</button>
+          </div>
+          <button onClick={handleClose} className="close-btn">Close</button>
         </div>
       )}
       </div>

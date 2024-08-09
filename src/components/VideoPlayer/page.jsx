@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Logo } from '@/../public';
 import City from '@/components/City/page'; // Pastikan komponen City diimpor dengan benar
@@ -11,6 +11,7 @@ const InteractiveVideo = () => {
   const [introBoxVisible, setIntroBoxVisible] = useState(true); // Kontrol visibilitas intro_box
   const [showCity, setShowCity] = useState(false); // Kontrol visibilitas komponen City
   const [showVideo, setShowVideo] = useState(true); // Kontrol visibilitas video
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const videoRef = useRef(null);
 
   const handleWhiteButtonClick = () => {
@@ -36,21 +37,43 @@ const InteractiveVideo = () => {
       videoRef.current.play();
       setIsPaused(false);
       setShowButton(false);
+      setShowCity(true);
     }
   };
 
   const handleVideoEnded = () => {
     setShowVideo(false); // Sembunyikan video setelah selesai
-    setShowCity(true); // Tampilkan komponen City setelah video selesai
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+  
+    window.addEventListener('resize', handleResize);
+  
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <div>
       {showVideo && (
-        <video ref={videoRef} width="600" onEnded={handleVideoEnded}>
-          <source src="/videos/Video_Intro_Airworld.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        <>
+        {!isMobile && (
+          <video ref={videoRef} width="600" onEnded={handleVideoEnded}>
+            <source src="/videos/Video_Intro_Airworld.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
+        {isMobile && (
+          <video ref={videoRef} width="600" onEnded={handleVideoEnded}>
+            <source src="/videos/Video_Intro_Airworld_Mobile.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
+      </>
       )}
       {introBoxVisible && (
         <div className="intro_box">
@@ -68,11 +91,12 @@ const InteractiveVideo = () => {
           <button className='letsgo_btn' onClick={handlePlayClick}>Let's Go</button>
         </div>
       )}
-      <div
-        className={`city ${showCity ? 'fade-in' : 'hidden'}`}
-      >
-        <City />
-      </div>
+
+      {showCity && (
+        <div className={`city ${showCity ? 'fade-in' : 'hidden'}`}>
+          <City />
+        </div>
+      )}
     </div>
   );
 };

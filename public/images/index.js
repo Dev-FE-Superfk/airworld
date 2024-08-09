@@ -1,2 +1,14 @@
 export { default as BackgroundOne } from './background_blur.png';
 export { default as Logo } from './logo.png';
+export { default as Who } from './who.png';
+export { default as Where } from './where.png';
+export { default as Why } from './why.png';
+export { default as When } from './when.png';
+export { default as What } from './what.png';
+export { default as How } from './how.png';
+export { default as McAlien } from './mc_alien.png';
+export { default as McBirdman } from './mc_birdman.png';
+export { default as McSleeper } from './mc_sleeper.png';
+export { default as McHeadset } from './mc_headset.png';
+export { default as McFarmer } from './mc_farmer.png';
+export { default as McGirl } from './mc_girl.png';

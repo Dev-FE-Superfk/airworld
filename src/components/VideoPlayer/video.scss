@@ -84,4 +84,29 @@ video{
     opacity: 1;
     visibility: visible;
   }
-  
+@media only screen and (max-width:767px){
+  .intro_flex{
+    img{
+      width: 150px;
+      height: auto;
+      margin-bottom: 40px;
+    }
+  }
+  .intro_text{
+    width: 100%;
+    padding: 0 20px;
+    font-size: 24px;
+    margin-bottom: 80px;
+  }
+  .letsgo_btn{
+    width: 200px;
+    height: 80px;
+    background: url('../../../public/images/letsgo_btn_m.png') no-repeat center / contain;
+    text-indent: -9999px;
+    position: absolute;
+    top: 15%;
+    border: none;
+    right: 40%;
+    cursor: pointer;
+  }
+}

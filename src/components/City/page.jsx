@@ -5,6 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import Popup from '@/components/Popup/page'
 import './city.scss';
+import NavBar from '@/components/NavBar/page';
 
 const City = () => {
   const mountRef = useRef(null);
@@ -51,7 +52,7 @@ const City = () => {
     // Load GLTF Models
     const loader = new GLTFLoader();
     const buildingFiles = [
-      { file: '/models/Sirine_Building_emmision.glb', category: 'sirine', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },
+      { file: '/models/Sirine_Building_emmision.glb', category: 'sirine', name: '', position: { x: 0, y: 0, z: 0 }, image: '/images/mc_ceo.png', description: '<p>In state of identified yet unenlightened consumerism consciousness; <br/>the power and infinite creative potential that lie concealed <br/>is now illuminated at the intersection of <br/><strong>AIR WORLD, AIR-VERSE and ANYWHERE</strong></p><p>CALLIN’ ALL <br/>CREATORS, ADVENTURERS AND RULES-BREAKERS <br/>the ONES who see things differently...</p><p>I am a future-maker, let’s</p>', thumbnails: [], tags: [] },
       { file: '/models/Apple_Building.glb', category: 'brands', name: 'Apple', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_apple.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
       { file: '/models/BMW_Building.glb', category: 'brands', name: 'BMW', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_bmw.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
       { file: '/models/Nike_Building.glb', category: 'brands', name: 'Nike', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_nike.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
@@ -59,9 +60,49 @@ const City = () => {
       { file: '/models/Cocacola_Building.glb', category: 'brands', name: 'Coca Cola', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_cocacola.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
       { file: '/models/Nintendo_Building.glb', category: 'brands', name: 'Nintendo', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_nintendo.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
       { file: '/models/Swatch_Building.glb', category: 'brands', name: 'Swatch', position: { x: 0, y: 0, z: 0 }, masthead: '/images/masthead_swatch.png', description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure iusto aut nesciunt tempore impedit quisquam, obcaecati qui et molestias architecto deserunt unde alias incidunt exercitationem omnis repellendus deleniti laudantium sapiente', thumbnails: ['/images/thumbs.png', '/images/thumbs.png', '/images/thumbs.png'], tags: ['User Interface', 'Data Analytics', 'System Integration', 'User Dashboard', 'Multi Plafroem Access', 'Loc-Based System', 'Website'] },
-      { file: '/models/Ballon_A_Animate.glb', category: 'balloon', position: { x: 0, y: 0, z: 0 }, image: '/images/mc_gamer.png', subclass: 'airworld', title: '<h3>Air World<span>TM</span></h3>', description: '<p>is a proprietary O2O social gaming network build upon the infrastructure of WEB2.0 / 3.0 Metaverse that allows users to play, learn, earn, entertain and socialize with strangers within the global community and people they know IRL.</p>' },  
-      { file: '/models/Ballon_C_Animate.glb', category: 'balloon', position: { x: 0, y: 0, z: 0 }, image: '/images/mc_deer.png', subclass: 'airverse', title: '<h3>Air Verse<span>TM</span></h3>', description: '<p>[ Metaverse-as-a-Service ]  is an immersive infrastructure that enable a wide range of industries - from retail, F&B and real estate to education and entertainment - to harness the potential of interactive virtual experiences and actionable insights  to grow their revenue without the heavy investment in infrastructure and development expertise typically required.</p>' },  
-      { file: '/models/Ballon_B_Animate.glb', category: 'balloon', position: { x: 0, y: 0, z: 0 }, image: '/images/mc_rabbit.png', subclass: 'anywhere', title: '<h3>Anywhere<span>TM</span></h3>', description: '<p>is the First Decentralized Location Based Social-Fi + DEPIN Data Network.</p><p>Our ANIWHERETM Social Platform provides users with the chance to connect with friends based on their physical locations. Users can adopt purely virtual identities and role-play as different characters through customizable avatars.</p><p>Our community can also engage in interactive quests created by other users and business partners such as retailers, shopping malls, hotels, and restaurants. These quests can be<ul><li>Simply as check-In</li><li>Funny gameplays</li><li>Make a purchase in a shop</li></ul></p>' },  
+      { file: '/models/Ballon_C_Animate.glb', category: 'balloon', position: { x: 0, y: 0, z: 0 }, image: '/images/mc_gamer.png', subclass: 'airworld', title: '<h3>Air World<span>TM</span></h3>', description: '<p>is a proprietary O2O social gaming network build upon the infrastructure of WEB2.0 / 3.0 Metaverse that allows users to play, learn, earn, entertain and socialize with strangers within the global community and people they know IRL.</p>' },  
+      { file: '/models/Ballon_A_Animate.glb', category: 'balloon', position: { x: -2, y: 0, z: 0 }, image: '/images/mc_deer.png', subclass: 'airverse', title: '<h3>Air Verse<span>TM</span></h3>', description: '<p>[ Metaverse-as-a-Service ]  is an immersive infrastructure that enable a wide range of industries - from retail, F&B and real estate to education and entertainment - to harness the potential of interactive virtual experiences and actionable insights  to grow their revenue without the heavy investment in infrastructure and development expertise typically required.</p>' },  
+      { file: '/models/Ballon_B_Animate.glb', category: 'balloon', position: { x: -2, y: 0, z: 8 }, image: '/images/mc_rabbit.png', subclass: 'anywhere', title: '<h3>Anywhere<span>TM</span></h3>', description: '<p>is the First Decentralized Location Based Social-Fi + DEPIN Data Network.</p><p>Our ANIWHERETM Social Platform provides users with the chance to connect with friends based on their physical locations. Users can adopt purely virtual identities and role-play as different characters through customizable avatars.</p><p>Our community can also engage in interactive quests created by other users and business partners such as retailers, shopping malls, hotels, and restaurants. These quests can be<ul><li>Simply as check-In</li><li>Funny gameplays</li><li>Make a purchase in a shop</li></ul></p>' },  
+      { file: '/models/B1.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B2.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B3.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B4.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B5.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B6.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B7.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B8.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B9.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B10.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B11.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B12.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B13.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B14.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },
+      { file: '/models/B15.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B16.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B17.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B18.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B19.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B20.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B21.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B22.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B23.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B24.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B25.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B26.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B27.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B28.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B29.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B30.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B31.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B32.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B33.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B34.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B35.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B36.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B37.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B38.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B39.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },  
+      { file: '/models/B40.glb', category: 'building', name: '', position: { x: 0, y: 0, z: 0 }, masthead: '', description: '', thumbnails: [], tags: [] },    
     ];
   
       buildingFiles.forEach((buildingData, index) => {
@@ -159,48 +200,40 @@ const City = () => {
 
     // Add event listener for click
     const handleClick = (event) => {
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-
-        raycaster.ray.origin.setFromMatrixPosition(camera.matrixWorld);
-        raycaster.ray.direction.set(mouse.x, mouse.y, 0.5).unproject(camera).sub(raycaster.ray.origin).normalize();
-
-        const intersects = raycaster.intersectObjects(scene.children, true);
-        if (intersects.length > 0) {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+  
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(scene.children, true);
+  
+      if (intersects.length > 0) {
           const intersectedObject = intersects[0].object;
-          if (intersectedObject.parent && intersectedObject.parent.userData) {
-            const userData = intersectedObject.parent.userData;
-            if (userData.category === 'balloon') {
-              if (userData.subclass === 'airworld') {
-                // Handle airworld balloon click
-                setSelectedBuilding({
-                  ...userData,
-                  subclass: 'airworld'
-                });
-              } else if (userData.subclass === 'airverse') {
-                // Handle airverse balloon click
-                setSelectedBuilding({
-                  ...userData,
-                  subclass: 'airverse'
-                });
-              } else if (userData.subclass === 'anywhere') {
-                // Handle anywhere balloon click
-                setSelectedBuilding({
-                  ...userData,
-                  subclass: 'anywhere'
-                });
-              } else {
-                // Handle other balloon subclasses if needed
-                setSelectedBuilding(null);
+  
+          // Traverse through parent objects to find the correct userData
+          let parent = intersectedObject;
+          while (parent && parent !== scene) {
+              if (parent.userData && parent.userData.category) {
+                  const userData = parent.userData;
+                  if (userData.category === 'balloon') {
+                      if (userData.subclass === 'airworld') {
+                          setSelectedBuilding({ ...userData, subclass: 'airworld' });
+                      } else if (userData.subclass === 'airverse') {
+                          setSelectedBuilding({ ...userData, subclass: 'airverse' });
+                      } else if (userData.subclass === 'anywhere') {
+                          setSelectedBuilding({ ...userData, subclass: 'anywhere' });
+                      } else {
+                          setSelectedBuilding(null);
+                      }
+                  } else if (userData.category === 'brands' || userData.category === 'sirine') {
+                      setSelectedBuilding(userData);
+                  } else {
+                      setSelectedBuilding(null);
+                  }
+                  break;
               }
-            } else if (userData.category === 'brands' || userData.category === 'sirine') {
-              // Handle brands or sirine click
-              setSelectedBuilding(userData);
-            } else {
-              setSelectedBuilding(null);
-            }
+              parent = parent.parent;
           }
-        }
+      }
     };
 
         window.addEventListener('click', handleClick);
@@ -275,6 +308,7 @@ const City = () => {
     return (
         <>
             <div ref={mountRef}></div>
+            <NavBar></NavBar>
             {selectedBuilding && (
             <Popup 
               brandsName={selectedBuilding.name} 
