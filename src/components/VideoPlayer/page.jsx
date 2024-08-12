@@ -1,7 +1,7 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Logo } from '@/../public';
+import { Logo } from '../../../public';
 import City from '@/components/City/page'; // Pastikan komponen City diimpor dengan benar
 import './video.scss';
 
@@ -11,7 +11,7 @@ const InteractiveVideo = () => {
   const [introBoxVisible, setIntroBoxVisible] = useState(true); // Kontrol visibilitas intro_box
   const [showCity, setShowCity] = useState(false); // Kontrol visibilitas komponen City
   const [showVideo, setShowVideo] = useState(true); // Kontrol visibilitas video
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(false); // Default to false; will be updated in useEffect
   const videoRef = useRef(null);
 
   const handleWhiteButtonClick = () => {
