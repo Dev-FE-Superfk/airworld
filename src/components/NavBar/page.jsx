@@ -57,7 +57,7 @@ export default function NavBar() {
                         <p><strong>AIRWORLD</strong> is driven by data analysts, data engineers, UI/UX designers, developers, devOps, animators stationed across HONG KONG, INDONESIA, SINGAPORE AND  THAILAND.</p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McAlien} width={960} height={960} alt='' />
+                        <Image src={McAlien} width={960} height={960} alt='' quality={100} />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>
@@ -69,7 +69,7 @@ export default function NavBar() {
                         <p>HQ in <strong>HONG KONG since 2021.</strong></p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McBirdman} width={960} height={960} alt='' />
+                        <Image src={McBirdman} width={960} height={960} alt='' quality={100} />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>
@@ -81,7 +81,7 @@ export default function NavBar() {
                         <p>Serving the new universe from <strong>DUBAI, HONG KONG, INDONESIA, MALAYSIA, SINGAPORE, THAILAND, VIETNAM.</strong></p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McGirl} width={960} height={960} alt='' />
+                        <Image src={McGirl} width={960} height={960} alt='' quality={100} />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>
@@ -93,7 +93,7 @@ export default function NavBar() {
                         <p>Just as the personal computer transformed our way of working and the smartphone reshaped our daily interactions, AIR offers unparalleled opportunities for creativity and innovation; redefining how we connect, work, play, and live. It also democratize access to experiences and opportunities, bridging gaps created by geography, socioeconomics, and even physical ability.</p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McFarmer} width={960} height={960} alt='' />
+                        <Image src={McFarmer} width={960} height={960} alt='' quality={100} />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>
@@ -105,7 +105,7 @@ export default function NavBar() {
                         <p>We help our clients grow their brand and revenue by driving unique Online-2-Offline engagements and actionable insights powered by our decentralized platforms i.e. <strong>AIR WORLD, AIR-VERSE and ANYWHERE.</strong></p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McSleeper} width={960} height={960} alt='' />
+                        <Image src={McSleeper} width={960} height={960} alt='' quality={100} />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>
@@ -121,7 +121,7 @@ export default function NavBar() {
                         </p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McHeadset} width={960} height={960} alt='' />
+                        <Image src={McHeadset} width={960} height={960} alt='' quality={100} />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>
