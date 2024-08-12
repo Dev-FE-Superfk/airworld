@@ -16,7 +16,8 @@ export default function NavBar() {
         setActivePopup(popupId); // Set the active popup based on the clicked item
     };
 
-    const handleClosePopup = () => {
+    const handleClosePopup = (event) => {
+        event.stopPropagation();
         setActivePopup(null); // Close the popup
     };
 
@@ -51,67 +52,67 @@ export default function NavBar() {
 
             {/* Conditional rendering of popups based on activePopup state */}
             {activePopup === 'who' && (
-                <div className="popup who">
+                <div className="popup who" onClick={(e) => e.stopPropagation()}>
                     <div className='content'>
                         <h2>Who</h2>
                         <p><strong>AIRWORLD</strong> is driven by data analysts, data engineers, UI/UX designers, developers, devOps, animators stationed across HONG KONG, INDONESIA, SINGAPORE AND  THAILAND.</p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McAlien} width={960} height={960} alt='' quality={100} />
+                        <Image src={McAlien} width={960} height={960} alt='' />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>
             )}
             {activePopup === 'when' && (
-                <div className="popup when">
+                <div className="popup when" onClick={(e) => e.stopPropagation()}>
                     <div className='content'>
                         <h2>When</h2>
                         <p>HQ in <strong>HONG KONG since 2021.</strong></p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McBirdman} width={960} height={960} alt='' quality={100} />
+                        <Image src={McBirdman} width={960} height={960} alt='' />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>
             )}
             {activePopup === 'where' && (
-                <div className="popup where">
+                <div className="popup where" onClick={(e) => e.stopPropagation()}>
                     <div className='content'>
                         <h2>Where</h2>
                         <p>Serving the new universe from <strong>DUBAI, HONG KONG, INDONESIA, MALAYSIA, SINGAPORE, THAILAND, VIETNAM.</strong></p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McGirl} width={960} height={960} alt='' quality={100} />
+                        <Image src={McGirl} width={960} height={960} alt='' />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>
             )}
             {activePopup === 'why' && (
-                <div className="popup why">
+                <div className="popup why" onClick={(e) => e.stopPropagation()}>
                     <div className='content'>
                         <h2>Why</h2>
                         <p>Just as the personal computer transformed our way of working and the smartphone reshaped our daily interactions, AIR offers unparalleled opportunities for creativity and innovation; redefining how we connect, work, play, and live. It also democratize access to experiences and opportunities, bridging gaps created by geography, socioeconomics, and even physical ability.</p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McFarmer} width={960} height={960} alt='' quality={100} />
+                        <Image src={McFarmer} width={960} height={960} alt='' />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>
             )}
             {activePopup === 'what' && (
-                <div className="popup what">
+                <div className="popup what" onClick={(e) => e.stopPropagation()}>
                     <div className='content'>
                         <h2>What</h2>
                         <p>We help our clients grow their brand and revenue by driving unique Online-2-Offline engagements and actionable insights powered by our decentralized platforms i.e. <strong>AIR WORLD, AIR-VERSE and ANYWHERE.</strong></p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McSleeper} width={960} height={960} alt='' quality={100} />
+                        <Image src={McSleeper} width={960} height={960} alt='' />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>
             )}
             {activePopup === 'how' && (
-                <div className="popup how">
+                <div className="popup how" onClick={(e) => e.stopPropagation()}>
                     <div className='content'>
                         <h2>How</h2>
                         <p>
@@ -121,7 +122,7 @@ export default function NavBar() {
                         </p>
                     </div>
                     <div className='mascot_box'>
-                        <Image src={McHeadset} width={960} height={960} alt='' quality={100} />
+                        <Image src={McHeadset} width={960} height={960} alt='' />
                     </div>
                     <button className="close_btn" onClick={handleClosePopup}>Close</button>
                 </div>

@@ -253,6 +253,7 @@ const City = () => {
 
     let currentT = 0; // Parameter for interpolation along the curve
     const duration = 15000; // Duration for the entire loop in milliseconds (adjusted to slow down)
+    const speed = 1 / (duration / 16); // Speed of movement, adjust as needed
 
     // Clock for animation
     const clock = new THREE.Clock();
@@ -260,11 +261,10 @@ const City = () => {
     // Animation Loop
     const animate = () => {
       requestAnimationFrame(animate);
-      const delta = clock.getDelta();
-      const elapsedTime = delta * 1000;
 
       if (mascot) {
         
+        const elapsedTime = clock.getDelta() * 1000;
         // Update parameter along the curve
         currentT += (elapsedTime / duration) % 1; 
 
@@ -280,6 +280,7 @@ const City = () => {
         mascot.quaternion.slerp(targetQuaternion, 0.1); // Smooth rotation
       }
 
+      const delta = clock.getDelta();
       mixers.forEach((mixer) => mixer.update(delta));
 
       controls.update();
